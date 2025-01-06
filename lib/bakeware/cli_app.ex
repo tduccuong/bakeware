@@ -19,16 +19,6 @@ defmodule Bakeware.CliApp do
       use Application
 
       def start(_type, _args) do
-        children = [
-          %{id: Task, restart: :temporary, start: {Task, :start_link, [&__MODULE__._main/0]}}
-        ]
-
-        opts = [strategy: :one_for_all, name: __MODULE__.Supervisor]
-        Supervisor.start_link(children, opts)
-      end
-
-      @doc false
-      def _main() do
         get_argc!()
         |> get_args()
         |> main()
